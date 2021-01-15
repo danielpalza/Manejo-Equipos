@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Button, Box, Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Snack from '../Snack';
+
 import LoginBox from './LoginBox';
 import RegisterBox from './RegisterBox';
 import Fetch from '../Fetch';
@@ -45,13 +45,16 @@ function Login(props) {
     ) {
       console.log('user:', user);
       console.log('props:', props);
-      props.loadBody(user);
-      props.fetchTrue();
+      
+      //agregar funcion, agregar url
+      Fetch(url, "POST", action)
+
+     
     } else {
-      handleClick({ message: 'Ingrese un email valido' });
+      Window.alert("Email erroneo.")
     }
   }
-
+  // crear funcion fetch y usarla en vez de esta
   async function readToken(token) {
     const myInit = {
       method: 'GET',
@@ -77,13 +80,13 @@ function Login(props) {
       <Box className={classes.boxLogin}>
         {ruta === 'LOGIN' ? (
           <LoginBox
-            handleClick={handleClick}
+            
             userLoad={userLoad}
             setRuta={setRuta}
           />
         ) : (
           <RegisterBox
-            handleClick={handleClick}
+            
             userLoad={userLoad}
             setRuta={setRuta}
           />
