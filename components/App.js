@@ -9,8 +9,8 @@ import Main from './Main/Main.js';
 function App(props) {
   const logged = props.state.statReducer.logged;
 
-  //return( <React.Fragment>{logged ? <Home/> : <Login/>}</React.Fragment>);
 
+//Cambiar "{logged ? <Main /> : <Login />}" para usar el router de react, mas seguro
   return (
     <React.Fragment>
       <ThemeProvider theme={Theme}>

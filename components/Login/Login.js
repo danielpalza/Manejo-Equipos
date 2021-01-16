@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Button, Box, Snackbar } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 
 import LoginBox from './LoginBox';
 import RegisterBox from './RegisterBox';
-import Fetch from '../Fetch';
+import { requestLoginRegister} from '../Fetch';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../../store/stats/reducer';
@@ -26,54 +24,40 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+
+
 function Login(props) {
+
+  //Cambiar "ruta" para usar el router de react
   const [ruta, setRuta] = useState('LOGIN');
+
   const classes = useStyle();
 
   console.log('login props:', props);
+  
+  //Revisa que el token de la anterior sesion sea valido
+  useEffect(() => {
+    localStorage.getItem('token') && createGetRequest("users/authToken",localStorage.getItem('token'), props.login );
+  }, []);
 
-  // Manejo de faltas
-  function handleClick(text) {
-    props.messageIn(text);
-  }
-
-  function userLoad(user) {
+  //Verifica el email y hace el pedido
+  function userLoad(user, dir) {
     if (
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        user.body.email
-      )
-    ) {
+        user.email
+      )) {
       console.log('user:', user);
       console.log('props:', props);
       
-      //agregar funcion, agregar url
-      Fetch(url, "POST", action)
+      //solucionar
+      if(dir==1)requestLoginRegister("login", user, props.login)
+      if(dir==2)requestLoginRegister("createUser", user )
 
-     
+    
     } else {
       Window.alert("Email erroneo.")
     }
   }
-  // crear funcion fetch y usarla en vez de esta
-  async function readToken(token) {
-    const myInit = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        token: token,
-      },
-    };
-
-    await fetch('/api/v1/users/authToken', myInit)
-      .then((res) => res.json())
-      .then((data) => props.login(data))
-      .catch((e) => {
-        console.log({ Status: 'ERROR_TOKEN', message: e });
-      });
-  }
-  useEffect(() => {
-    localStorage.getItem('token') && readToken(localStorage.getItem('token'));
-  }, []);
 
   return (
     <Box className={classes.root}>
@@ -95,6 +79,9 @@ function Login(props) {
     </Box>
   );
 }
+
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 //

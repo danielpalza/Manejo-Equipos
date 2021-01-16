@@ -1,7 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 import statReducer from './stats/reducer';
 
-//nueva store
 //Creando store
 
 const reducers = combineReducers({statReducer});

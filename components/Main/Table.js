@@ -10,6 +10,8 @@ import { mapDispatchToProps } from '../../store/stats/actions';
 import {DeleteOutline} from '@material-ui/icons/DeleteOutline';
 import {Edit} from '@material-ui/icons/Edit';
 
+import {createGetRequest} from "../Fetch"
+
 import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
@@ -25,20 +27,15 @@ function Table(props) {
   const classes = useStyle();
   const [ruta, setRuta] = useState('');
   const [rowData, setRowData] = useState({});
-  const [body, setBody] = useState({
-    body: {},
-    use: ['equipment', 'getAllEquipment'],
-    mod: 'GET',
-    action: 'EQUIPMENT_LOAD',
-    token: props.state.statReducer.user.token,
-  });
-  //Icons
+  
 
+  //Icons
   const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
 
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
   };
+  
 
   let columns = [
     { title: 'Modelo', field: 'model' },
@@ -56,16 +53,16 @@ function Table(props) {
 
   let data = props.state.statReducer.equipments;
 
+  useEffect(() => {
+    createGetRequest("getAllEquipment", props.state.statReducer.user.token, props.equipLoad )
+  }, []);
+
+
+  //Revisar la tabla para ver como funciona y mejorarlo, es un desastre
 
   function handleAction(data, action) {
     setRowData(data);
     setRuta(action);
-  }
-
-  if (props.state.statReducer.reload) {
-    props.loadBody(body);
-    props.fetchTrue();
-    props.reloadFalse();
   }
 
   return (

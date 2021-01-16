@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, TextField, Button, Box } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
@@ -11,20 +11,12 @@ const useStyle = makeStyles((theme) => ({
 
 const RegisterBox = (props) => {
   const classes = useStyle();
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [user, setUser] = useState({
-    body: { email: '', password: '', confirmacion: '', name: '', lastName: '' },
-    use: ['users', 'createUser'],
-    mod: 'POST',
-    action: 'MESSAGE_IN',
-  });
+  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastName: ''});
 
   //Verificamos que las claves sean iguales
   const handleConfirmacion = () => {
-    user.body.password === user.body.confirmacion && props.userLoad(user);
-    user.body.password !== user.body.confirmacion &&
-      props.handleClick('Las contraseñas no son iguales');
+    user.password === user.confirmacion && props.userLoad(user, 2);
+    user.password !== user.confirmacion && Window.alert ("Las contraseñas no son iguales")
   };
 
   return (
@@ -37,8 +29,7 @@ const RegisterBox = (props) => {
           onChange={(e) => {
             setUser({
               ...user,
-              body: { ...user.body, email: e.target.value },
-            });
+              email: e.target.value });
           }}
         />
       </Box>
@@ -52,8 +43,7 @@ const RegisterBox = (props) => {
             onChange={(e) => {
               setUser({
                 ...user,
-                body: { ...user.body, password: e.target.value },
-              });
+                password: e.target.value });
             }}
           />
         </Box>
@@ -66,8 +56,7 @@ const RegisterBox = (props) => {
             onChange={(e) => {
               setUser({
                 ...user,
-                body: { ...user.body, confirmacion: e.target.value },
-              });
+               confirmacion: e.target.value });
             }}
           />
         </Box>
@@ -81,8 +70,7 @@ const RegisterBox = (props) => {
             onChange={(e) => {
               setUser({
                 ...user,
-                body: { ...user.body, name: e.target.value },
-              });
+               name: e.target.value });
             }}
           />
         </Box>
@@ -94,8 +82,7 @@ const RegisterBox = (props) => {
             onChange={(e) => {
               setUser({
                 ...user,
-                body: { ...user.body, lastName: e.target.value },
-              });
+                lastName: e.target.value });
             }}
           />
         </Box>

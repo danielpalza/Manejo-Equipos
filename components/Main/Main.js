@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Snack from '../Snack';
+
 import Fetch from '../Fetch';
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
@@ -33,14 +33,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Main(props) {
-  //Guardado de token nuevo
+  //Cambiar este guardado para poder usar el main sin redux, es para lo unico que lo precisa
   if (props.state.statReducer.user.token !== undefined) {
     localStorage.setItem('token', props.state.statReducer.user.token);
   }
-  const token = props.state.statReducer.user.token
-    ? props.state.statReducer.user.token
-    : localStorage.getItem('token');
-
+ 
   const classes = useStyles();
   const theme = useTheme();
 
@@ -79,10 +76,8 @@ function Main(props) {
         handleDrawerClose={handleDrawerClose}
         val={open}
       />
-
-      <Box className={classes.content}>
+        <Box className={classes.content}>
         <Box className={classes.toolbar}></Box>
-
         <Box>
           <Table />
           <Agregar action={props} open={ruta==="AGREGAR"?true:false} setRuta={handleRoute} />

@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './app/index.js',
+  entry: './index.js',
   output: {
     path: __dirname + '/public',
     filename: 'bundle.js',
@@ -11,18 +11,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
       },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-url-loader',
-            options: {
-              limit: 10000,
-            },
-          },
-        ],
-      },
-     
+           
     ],
   },
   

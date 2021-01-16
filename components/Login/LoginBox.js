@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, TextField, Button, Box } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
@@ -10,20 +10,16 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const LoginBox = (props) => {
+  console.log("props login:", props)
   const classes = useStyle();
-  const [user, setUser] = useState({
-    body: { email: '', password: '' },
-    use: ['users', 'login'],
-    mod: 'POST',
-    action: 'USER_LOGIN',
-  });
+  const [user, setUser] = useState({ email: '', password: '' },);
 
   // Manejo de faltas, pasar al login mayor
 
   const handleConfirmacion = () => {
-    user.body.password.length === 0 &&
-      props.handleClick('Debe ingresar una contraseña');
-    user.body.password.length > 0 && props.userLoad(user);
+    console.log("user handle:", user)
+    user.password.length === 0 && Window.alert('Debe ingresar una contraseña')
+    user.password.length > 0 && props.userLoad(user, 1);
   };
 
   return (
@@ -36,8 +32,7 @@ const LoginBox = (props) => {
           onChange={(e) => {
             setUser({
               ...user,
-              body: { ...user.body, email: e.target.value },
-            });
+              email: e.target.value});
           }}
         />
       </Box>
@@ -50,8 +45,7 @@ const LoginBox = (props) => {
           onChange={(e) => {
             setUser({
               ...user,
-              body: { ...user.body, password: e.target.value },
-            });
+              password: e.target.value });
           }}
         />
       </Box>
