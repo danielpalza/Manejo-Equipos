@@ -8,7 +8,7 @@ async function Fetch(myRequest, action) {
       .then((res) => res.json())
       .then((data) => {
         console.log('data fetch:', data);
-
+        console.log("function:", action)
         typeof action == 'function' && action(data);
         })
       .catch((e) => console.log({ Status: 'ERROR_FETCH', message:"Error en el proceso", text: e }));
@@ -20,6 +20,7 @@ function createPostRequest(url, token, body, action){
    /**User routes */
    const urlUse = `${urlAPI}api/v1/${url}`;
 
+  console.log("createPostRequest: ", url, token, body, action )
    // arreglar fallas en envios
    const myInitPost = {
      method: "POST",
@@ -38,6 +39,7 @@ function createPostRequest(url, token, body, action){
 }
 
 function createGetRequest(url, token, action){
+  console.log("createGetRequest: ", url, token, action )
   const urlUse = `${urlAPI}api/v1/${url}`;
   const myInitGet = {
   method: "GET",
@@ -68,7 +70,7 @@ function requestLoginRegister(url, body, action){
   let myRequest = new Request(urlUse, myInitGet);
   console.log("urlUse:", urlUse)
   
-  Fetch(myRequest, {})
+  Fetch(myRequest, action)
 }
 
 

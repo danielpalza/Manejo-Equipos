@@ -3,7 +3,7 @@ import { makeStyles, Button, Box, Snackbar } from '@material-ui/core';
 
 import LoginBox from './LoginBox';
 import RegisterBox from './RegisterBox';
-import { requestLoginRegister} from '../Fetch';
+import { createGetRequest, requestLoginRegister} from '../Fetch';
 
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../../store/stats/reducer';
@@ -37,7 +37,7 @@ function Login(props) {
   
   //Revisa que el token de la anterior sesion sea valido
   useEffect(() => {
-    localStorage.getItem('token') && createGetRequest("users/authToken",localStorage.getItem('token'), props.login );
+    localStorage.getItem('token') && createGetRequest("users/authToken", localStorage.getItem('token'), props.login );
   }, []);
 
   //Verifica el email y hace el pedido
@@ -48,10 +48,10 @@ function Login(props) {
       )) {
       console.log('user:', user);
       console.log('props:', props);
-      
+      console.log("login function:", props.login)
       //solucionar
-      if(dir==1)requestLoginRegister("login", user, props.login)
-      if(dir==2)requestLoginRegister("createUser", user )
+      if(dir==1)requestLoginRegister("users/login", user, props.login)
+      if(dir==2)requestLoginRegister("users/createUser", user )
 
     
     } else {

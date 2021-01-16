@@ -54,7 +54,7 @@ function Table(props) {
   let data = props.state.statReducer.equipments;
 
   useEffect(() => {
-    createGetRequest("getAllEquipment", props.state.statReducer.user.token, props.equipLoad )
+    createGetRequest("equipment/getAllEquipment", props.state.statReducer.user.token, props.equipLoad )
   }, []);
 
 

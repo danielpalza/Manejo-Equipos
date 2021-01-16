@@ -5,9 +5,11 @@ const iniState = {
 };
 
 export default function Reducer(state = iniState, action) {
+
   console.log('action data:', action);
   /*Acciones login*/
-
+  
+  //Arreglar el tener que usar solo el login para el login comun y el token
   if (action.type === 'USER_LOGIN') {
     return Object.assign({}, state, {
       ...state,
