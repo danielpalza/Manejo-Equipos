@@ -20,7 +20,7 @@ function createPostRequest(url, token, body, action){
    /**User routes */
    const urlUse = `${urlAPI}api/v1/${url}`;
 
-  console.log("createPostRequest: ", url, token, body, action )
+
    // arreglar fallas en envios
    const myInitPost = {
      method: "POST",
@@ -39,7 +39,7 @@ function createPostRequest(url, token, body, action){
 }
 
 function createGetRequest(url, token, action){
-  console.log("createGetRequest: ", url, token, action )
+
   const urlUse = `${urlAPI}api/v1/${url}`;
   const myInitGet = {
   method: "GET",
@@ -50,12 +50,12 @@ function createGetRequest(url, token, action){
   };
 
   let myRequest = new Request(urlUse, myInitGet);
-  console.log("urlUse:", urlUse)
+ 
   Fetch(myRequest, action)
 }
 
 function requestLoginRegister(url, body, action){
-  console.log("request:",url , body)
+
   const urlUse = `${urlAPI}api/v1/${url}`;
   const myInitGet = {
   method: "POST",

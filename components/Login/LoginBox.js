@@ -17,7 +17,7 @@ const LoginBox = (props) => {
   // Manejo de faltas, pasar al login mayor
 
   const handleConfirmacion = () => {
-    console.log("user handle:", user)
+   
     user.password.length === 0 && Window.alert('Debe ingresar una contraseña')
     user.password.length > 0 && props.userLoad(user, 1);
   };

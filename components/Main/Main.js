@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import {
   makeStyles,
   useTheme,
   CssBaseline,
   Box,
-  Snackbar,
+  
 } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 
-import Fetch from '../Fetch';
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
 import Agregar from './Agregar';
-import Update from './Update';
-import Delete from './Delete';
 import Table from './Table';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../../store/stats/reducer';

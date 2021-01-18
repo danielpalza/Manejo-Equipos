@@ -10,12 +10,7 @@ import { mapDispatchToProps } from '../../store/stats/actions';
 import {DeleteOutline} from '@material-ui/icons/DeleteOutline';
 import {Edit} from '@material-ui/icons/Edit';
 
-import {createGetRequest} from "../Fetch"
-
-import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
+import {createGetRequest} from "../Fetch";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -32,22 +27,22 @@ function Table(props) {
   //Icons
   const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
   };
   
 
   let columns = [
+    { title: 'Marca', field: 'marca' },
     { title: 'Modelo', field: 'model' },
     { title: 'Id', field: 'id' },
     { title: 'N° Serie', field: 'serie', type: 'numeric' },
     {
-      title: 'Fecha ingreso',
+      title: 'Fecha de ingreso',
       field: 'fechaIngreso',
     },
     {
-      title: 'Fecha egreso',
-      field: 'fechaEngreso',
+      title: 'Fecha de egreso',
+      field: 'fechaEgreso',
     },
   ];
 
@@ -61,6 +56,7 @@ function Table(props) {
   //Revisar la tabla para ver como funciona y mejorarlo, es un desastre
 
   function handleAction(data, action) {
+    
     setRowData(data);
     setRuta(action);
   }

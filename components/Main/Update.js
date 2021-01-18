@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Fetch from '../Fetch';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '../../store/stats/reducer';
-import { mapDispatchToProps } from '../../store/stats/actions';
+import React, { useState } from 'react';
+import _ from 'lodash';
+import { createPostRequest } from '../Fetch';
 import {
   TextField,
   makeStyles,
@@ -11,43 +9,19 @@ import {
   Checkbox,
   FormControlLabel,
 } from '@material-ui/core';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 import Dialog from '@material-ui/core/Dialog';
 import Edit from '@material-ui/icons/Edit';
-
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
 
-//mejorar el procesado de este formulario
-const añoActual = 2020;
+let d = new Date();
 
-const mesArray = [
-  { value: 'Enero' },
-  { value: 'Febrero' },
-  { value: 'Marzo' },
-  { value: 'Abril' },
-  { value: 'Mayo' },
-  { value: 'Junio' },
-  { value: 'Julio' },
-  { value: 'Agosto' },
-  { value: 'Septiembre' },
-  { value: 'Octubre' },
-  { value: 'Noviembre' },
-  { value: 'Diciembre' },
-];
+// Arreglar para que los dates sean exactos, con años bisiestos y cantidad de dias en los meses exactos
+const mesArray = _.range(1, 13);
+const diaArray = _.range(1, 32);
+const añoArray = _.range(1940, d.getFullYear() + 1);
 
-let arr = [];
-for (let i = 1; i < 32; i++) {
-  arr.push({ value: `${i}` });
-}
-const diaArray = arr;
-
-arr = [];
-for (let i = 1940; i <= añoActual; i++) {
-  arr.push({ value: `${i}` });
-}
-const añoArray = arr;
-
+//acomodar los estilos en otra parte
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -72,84 +46,82 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Update(props) {
-  const classes= useStyles()
+  console.log("props update:", props)
+  const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [product, setProduct] = useState({
-    model: '',
-    id: '',
-    serie: '',
+    marca: ``,
+    model: ``,
+    id: ``,
+    serie: ``,
+    mes:'',
+    año:'',
+    dia:''
   });
-  const [mes, setMes] = useState('Enero');
-  const [año, setAño] = useState('2020');
-  const [dia, setDia] = useState('1');
-
-  //debe agregar un equipo
-
+  
   const handleChange = (event) => {
-    event.target.name === 'Dia' && setDia(event.target.value);
-    event.target.name === 'Mes' && setMes(event.target.value);
-    event.target.name === 'Año' && setAño(event.target.value);
-    event.target.name === 'Modelo' &&
-      setProduct({ ...product, model: event.target.value });
-    event.target.name === 'ID' &&
-      setProduct({ ...product, id: event.target.value });
-    event.target.name === 'Serie' &&
-      setProduct({ ...product, serie: event.target.value });
-  };
+    setProduct({...product, [event.target.name]: event.target.value})
+   };
+   
 
-  const HandleRoute = () => {
+   //comprimir mas este metodo
+  const ActualizarEquipo = () => {
+    const state = {
+      model: product.model === '' ? props.rowData.model : product.model,
+      marca: product.marca === '' ? props.rowData.marca : product.marca,
+      id: product.id === '' ? props.rowData.id : product.id,
+      serie: product.serie === '' ? props.rowData.serie : product.serie,
+      fechaEgreso: disabled ? `${product.dia}/${product.mes}/${product.año}` : '',
+      _id: props.rowData._id,
+      fechaIngreso: props.rowData.fechaIngreso
+    };
+
+    //Arreglar la action, no necesitaria pedir todo los equipos al server de vuelta, tal vez un post sin accion
+    createPostRequest('equipment/updateEquipment', props.action.state.statReducer.user.token, state, {});
+    props.action.equipEdit(state)
+
     props.setRuta('');
   };
-
-  const ActualizarEquipo = () => {
-
-    const state = {
-      body: {
-        model:product.model===""?props.rowData.model:product.model,
-        id:product.id===""?props.rowData.id:product.id,
-        serie:product.serie===""?props.rowData.serie:product.serie,
-        fechaEgreso: disabled ? `${dia}/${mes}/${año}` : '',
-        _id: props.rowData._id,
-      },
-      use: ['equipment', 'updateEquipment'],
-      mod: 'POST',
-      token: props.action.state.statReducer.user.token,
-      action: 'MESSAGE_IN',
-    };
-    props.action.loadBody(state);
-    props.action.fetchTrue();
-    props.action.reloadTrue();
-    HandleRoute();
-  };
-
+  
+  //Cambiar para que aparezca los datos actuales del equipo al momento de modificarlos
   return (
     <Dialog
       open={props.open}
-      onClose={HandleRoute}
+      onClose={()=>props.setRuta("")}
       aria-labelledby="simple-dialog-title"
     >
       <div className={classes.root}>
         <TextField
           id="filled-basic"
-          name="Modelo"
+          name="model"
           label="Modelo"
           variant="filled"
           onChange={handleChange}
-          defaultValue={product.model}
+          defaultValue={props.rowData.model}
         />
         <TextField
           id="filled-basic"
-          name="ID"
+          name="id"
           label="ID"
           variant="filled"
           onChange={handleChange}
+          defaultValue={props.rowData.id}
         />
         <TextField
           id="filled-basic"
-          name="Serie"
+          name="serie"
           label="Serie"
           variant="filled"
           onChange={handleChange}
+          defaultValue={props.rowData.serie}
+        />
+        <TextField
+          id="filled-basic"
+          name="marca"
+          label="Marca"
+          variant="filled"
+          onChange={handleChange}
+          defaultValue={props.rowData.marca}
         />
       </div>
 
@@ -170,9 +142,9 @@ function Update(props) {
           disabled={!disabled}
           id="standard-select-dia"
           select
-          name="Dia"
+          name="dia"
           label="Dia"
-          value={dia}
+          value={product.dia}
           onChange={handleChange}
           helperText="Seleccione el dia"
         >
@@ -187,9 +159,9 @@ function Update(props) {
           disabled={!disabled}
           id="standard-select-mes"
           select
-          name="Mes"
+          name="mes"
           label="Mes"
-          value={mes}
+          value={product.mes}
           onChange={handleChange}
           helperText="Seleccione el mes"
         >
@@ -204,9 +176,9 @@ function Update(props) {
           disabled={!disabled}
           id="standard-select-año"
           select
-          name="Año"
+          name="año"
           label="Año"
-          value={año}
+          value={product.año}
           onChange={handleChange}
           helperText="Seleccione el año"
         >
@@ -232,7 +204,7 @@ function Update(props) {
           variant="outlined"
           color="secondary"
           startIcon={<DeleteIcon />}
-          onClick={() => HandleRoute()}
+          onClick={() => props.setRuta('')}
         >
           Cancelar
         </Button>

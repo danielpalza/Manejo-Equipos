@@ -46,9 +46,7 @@ function Login(props) {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         user.email
       )) {
-      console.log('user:', user);
-      console.log('props:', props);
-      console.log("login function:", props.login)
+     
       //solucionar
       if(dir==1)requestLoginRegister("users/login", user, props.login)
       if(dir==2)requestLoginRegister("users/createUser", user )

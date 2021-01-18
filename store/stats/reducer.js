@@ -33,6 +33,32 @@ export default function Reducer(state = iniState, action) {
       equipments: action.stat.data,
     });
   }
+
+  if (action.type === 'EQUIPMENT_EDIT') {
+      
+    let arr = state.equipments.map(a => a._id == action.stat._id? a=action.stat:"")
+
+    return Object.assign({}, state, {
+      ...state, equipments: [...arr]
+    });
+  }
+
+  if (action.type === 'EQUIPMENT_ADD') {
+    
+    return Object.assign({}, state, {
+      ...state, equipments: [action.stat, ...state.equipments]
+    });
+  }
+
+  if (action.type === 'EQUIPMENT_DELETE') {
+      
+    let arr = state.equipments.filter(a => a._id !== action.stat._id)
+    console.log("arr: ", arr)
+    return Object.assign({}, state, {
+      ...state, equipments: [...arr]
+    });
+  }
+  
  
   /*Retornamos el estado actualizado*/
   return state;
