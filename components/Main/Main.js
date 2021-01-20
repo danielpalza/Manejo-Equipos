@@ -4,9 +4,7 @@ import {
   useTheme,
   CssBaseline,
   Box,
-  
 } from '@material-ui/core';
-
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
 import Agregar from './Agregar';
@@ -52,16 +50,14 @@ function Main(props) {
     setOpen(false);
   };
 
-  //cierre de sesion
+  //Mejorar el cierre de sesion
   const handleCloseSession = () => {
     localStorage.setItem('token', '');
     props.unLogin();
   };
   ruta === 'OUT' && handleCloseSession();
 
-  // Enviar datos del navbar a agregar
-  // O poner "agregar" aqui
-  //Crear tabla y navegacion
+ 
   return (
     <div className={classes.root}>
       <CssBaseline />

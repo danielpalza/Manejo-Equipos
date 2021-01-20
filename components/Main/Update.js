@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Update(props) {
-  console.log("props update:", props)
+  
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [product, setProduct] = useState({

@@ -13,10 +13,19 @@ const RegisterBox = (props) => {
   const classes = useStyle();
   const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastName: ''});
 
-  //Verificamos que las claves sean iguales
+  const handleChange = (event) => {
+    setUser({...user, [event.target.name]: event.target.value})
+   };
+
+  //Mejorar esta verificacion
   const handleConfirmacion = () => {
-    user.password === user.confirmacion && props.userLoad(user, 2);
-    user.password !== user.confirmacion && Window.alert ("Las contraseñas no son iguales")
+    if(user.every(a=> a!=="") && user.password==user.confirmacion){
+      props.userLoad(user, 2);
+    }
+    else{
+      Window.alert ("Las contraseñas no son iguales")
+    }
+     
   };
 
   return (
@@ -24,13 +33,10 @@ const RegisterBox = (props) => {
       <Box className={classes.boxText} m={3}>
         <TextField
           id="standard-basic"
+          name="email"
           color="primary"
           label="Email"
-          onChange={(e) => {
-            setUser({
-              ...user,
-              email: e.target.value });
-          }}
+          onChange={handleChange}
         />
       </Box>
       <Box display="flex">
@@ -38,26 +44,20 @@ const RegisterBox = (props) => {
           <TextField
             id="standard-basic"
             color="primary"
+            email="password"
             type="password"
             label="Contraseña"
-            onChange={(e) => {
-              setUser({
-                ...user,
-                password: e.target.value });
-            }}
+            onChange={handleChange}
           />
         </Box>
         <Box className={classes.boxText} m={3}>
           <TextField
             id="standard-basic"
             color="primary"
+            name="confirmacion"
             type="password"
             label="Confirmación"
-            onChange={(e) => {
-              setUser({
-                ...user,
-               confirmacion: e.target.value });
-            }}
+            onChange={handleChange}
           />
         </Box>
       </Box>
@@ -66,24 +66,18 @@ const RegisterBox = (props) => {
           <TextField
             id="standard-basic"
             color="primary"
+            name="name"
             label="Nombre"
-            onChange={(e) => {
-              setUser({
-                ...user,
-               name: e.target.value });
-            }}
+            onChange={handleChange}
           />
         </Box>
         <Box className={classes.boxText} m={3}>
           <TextField
             id="standard-basic"
             color="primary"
+
             label="Apellido"
-            onChange={(e) => {
-              setUser({
-                ...user,
-                lastName: e.target.value });
-            }}
+            onChange={handleChange}
           />
         </Box>
       </Box>

@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { mapDispatchToProps } from '../../store/stats/actions';
-import { mapStateToProps } from '../../store/stats/reducer';
 import clsx from 'clsx';
 import {
   Box,
   Drawer,
   makeStyles,
-  useTheme,
-  CssBaseline,
-  Toolbar,
   IconButton,
-  Typography,
   Divider,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -49,8 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar(props) {
-  console.log('Navbar props:', props);
-  const [showNav, setShowNav] = useState(false);
+ 
   const classes = useStyles();
   const open = props.val;
 

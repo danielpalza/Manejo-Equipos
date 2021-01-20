@@ -56,7 +56,6 @@ function Table(props) {
   //Revisar la tabla para ver como funciona y mejorarlo, es un desastre
 
   function handleAction(data, action) {
-    
     setRowData(data);
     setRuta(action);
   }

@@ -1,13 +1,10 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import Fetch from '../Fetch';
-import { connect } from 'react-redux';
-import { mapStateToProps } from '../../store/stats/reducer';
-import { mapDispatchToProps } from '../../store/stats/actions';
-import { TextField, makeStyles, MenuItem, Button } from '@material-ui/core';
+import {createPostRequest} from "../Fetch";
+import { makeStyles, Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,36 +26,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Delete(props) {
+  console.log("props :", props)
   const classes = useStyles();
 
-
-  const handleClose=()=>{
-    props.setRuta("")
-  }
-
   const BorrarEquipo = () => {
-    const state = {
-      body: {_id:props.rowData._id},
-      use: ['equipment', 'deleteEquipment'],
-      mod: 'POST',
-      token: props.action.state.statReducer.user.token,
-      action: 'MESSAGE_IN',
-    };
-    props.action.loadBody(state)
-    props.action.fetchTrue()
-    props.action.reloadTrue()
-    handleClose()
+   createPostRequest("equipment/deleteEquipment",props.action.state.statReducer.user.token, {_id:props.rowData._id}, {})
+   props.action.equipDelete(props.rowData._id)
+   props.setRuta("")
 
   };
 
   return (
-  <Dialog open={props.open} onClose={handleClose} aria-labelledby="simple-dialog-title" >
-    <DialogTitle id="simple-dialog-title">¿Seguro quiere borrar este elemento?</DialogTitle>
+  <Dialog open={props.open} onClose={()=> props.setRuta("")} aria-labelledby="simple-dialog-title" >
+    <DialogTitle id="simple-dialog-title">¿Seguro quiere borrar este equipo?</DialogTitle>
       <div className={classes.boxDialog}>
         <Button className={classes.button} variant="outlined" color="secondary" onClick={()=> BorrarEquipo()} startIcon={<DeleteIcon />}>
           Borrar
         </Button>
-        <Button className={classes.button} variant="outlined" color="primary" onClick={()=> handleClose()} startIcon={<ClearOutlinedIcon />}>
+        <Button className={classes.button} variant="outlined" color="primary" onClick={()=> props.setRuta("")} startIcon={<ClearOutlinedIcon />}>
           Cancelar
         </Button>
       </div>

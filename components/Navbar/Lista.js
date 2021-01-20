@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  
+import {  
   makeStyles,
-  
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -22,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ListNavbar = (props) => {
   const classes = useStyles();
-    console.log("props lista:", props)
+    
   return (
     <div className={classes.root}>
       

@@ -6,7 +6,7 @@ const iniState = {
 
 export default function Reducer(state = iniState, action) {
 
-  console.log('action data:', action);
+
   /*Acciones login*/
   
   //Arreglar el tener que usar solo el login para el login comun y el token
@@ -52,8 +52,8 @@ export default function Reducer(state = iniState, action) {
 
   if (action.type === 'EQUIPMENT_DELETE') {
       
-    let arr = state.equipments.filter(a => a._id !== action.stat._id)
-    console.log("arr: ", arr)
+    let arr = state.equipments.filter(a => a._id !== action.stat)
+  
     return Object.assign({}, state, {
       ...state, equipments: [...arr]
     });

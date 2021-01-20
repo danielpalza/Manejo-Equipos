@@ -1,5 +1,3 @@
-import React from 'react';
-
 //Login
 export function userLogin(stat) {
   console.log(stat);
