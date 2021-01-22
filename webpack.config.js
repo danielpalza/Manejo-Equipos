@@ -6,9 +6,9 @@ module.exports = {
     path: __dirname + '/public',
     filename: 'bundle.js',
   },
-  plugins: [
+ /* plugins: [
     new BundleAnalyzerPlugin()
-  ],
+  ],*/
   module: {
     rules: [ 
       {
