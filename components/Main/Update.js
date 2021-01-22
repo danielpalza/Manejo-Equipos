@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import _ from 'lodash';
+import range from 'lodash/range';
 import { createPostRequest } from '../Fetch';
 import {
   TextField,
-  makeStyles,
   MenuItem,
   Button,
   Checkbox,
   FormControlLabel,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import Edit from '@material-ui/icons/Edit';
@@ -17,9 +17,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 let d = new Date();
 
 // Arreglar para que los dates sean exactos, con años bisiestos y cantidad de dias en los meses exactos
-const mesArray = _.range(1, 13);
-const diaArray = _.range(1, 32);
-const añoArray = _.range(1940, d.getFullYear() + 1);
+const mesArray = range(1, 13);
+const diaArray = range(1, 32);
+const añoArray = range(1940, d.getFullYear() + 1);
 
 //acomodar los estilos en otra parte
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Update(props) {
-  
   const classes = useStyles();
   const [disabled, setDisabled] = useState(false);
   const [product, setProduct] = useState({
@@ -54,40 +53,46 @@ function Update(props) {
     model: ``,
     id: ``,
     serie: ``,
-    mes:'',
-    año:'',
-    dia:''
+    mes: '',
+    año: '',
+    dia: '',
   });
-  
-  const handleChange = (event) => {
-    setProduct({...product, [event.target.name]: event.target.value})
-   };
-   
 
-   //comprimir mas este metodo
+  const handleChange = (event) => {
+    setProduct({ ...product, [event.target.name]: event.target.value });
+  };
+
+  //comprimir mas este metodo
   const ActualizarEquipo = () => {
     const state = {
       model: product.model === '' ? props.rowData.model : product.model,
       marca: product.marca === '' ? props.rowData.marca : product.marca,
       id: product.id === '' ? props.rowData.id : product.id,
       serie: product.serie === '' ? props.rowData.serie : product.serie,
-      fechaEgreso: disabled ? `${product.dia}/${product.mes}/${product.año}` : '',
+      fechaEgreso: disabled
+        ? `${product.dia}/${product.mes}/${product.año}`
+        : '',
       _id: props.rowData._id,
-      fechaIngreso: props.rowData.fechaIngreso
+      fechaIngreso: props.rowData.fechaIngreso,
     };
 
     //Arreglar la action, no necesitaria pedir todo los equipos al server de vuelta, tal vez un post sin accion
-    createPostRequest('equipment/updateEquipment', props.action.state.statReducer.user.token, state, {});
-    props.action.equipEdit(state)
+    createPostRequest(
+      'equipment/updateEquipment',
+      props.action.state.statReducer.user.token,
+      state,
+      {}
+    );
+    props.action.equipEdit(state);
 
     props.setRuta('');
   };
-  
+
   //Cambiar para que aparezca los datos actuales del equipo al momento de modificarlos
   return (
     <Dialog
       open={props.open}
-      onClose={()=>props.setRuta("")}
+      onClose={() => props.setRuta('')}
       aria-labelledby="simple-dialog-title"
     >
       <div className={classes.root}>

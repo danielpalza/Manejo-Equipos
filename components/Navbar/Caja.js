@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import {
-  Box,
-  Drawer,
-  makeStyles,
-  IconButton,
-  Divider,
-} from '@material-ui/core';
+import { Box, Drawer, IconButton, Divider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Lista from './Lista';
 
@@ -42,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar(props) {
- 
   const classes = useStyles();
   const open = props.val;
 
@@ -67,7 +61,7 @@ function Navbar(props) {
           </IconButton>
         </div>
         <Divider />
-        <Lista  handleRoute={props.handleRoute}/>
+        <Lista handleRoute={props.handleRoute} />
       </Drawer>
     </Box>
   );

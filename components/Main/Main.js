@@ -1,10 +1,6 @@
-import React, { useState} from 'react';
-import {
-  makeStyles,
-  useTheme,
-  CssBaseline,
-  Box,
-} from '@material-ui/core';
+import React, { useState } from 'react';
+import { CssBaseline, Box } from '@material-ui/core';
+import {useTheme, makeStyles } from '@material-ui/core/styles';
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
 import Agregar from './Agregar';
@@ -30,7 +26,7 @@ function Main(props) {
   if (props.state.statReducer.user.token !== undefined) {
     localStorage.setItem('token', props.state.statReducer.user.token);
   }
- 
+
   const classes = useStyles();
   const theme = useTheme();
 
@@ -57,7 +53,6 @@ function Main(props) {
   };
   ruta === 'OUT' && handleCloseSession();
 
- 
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -67,11 +62,15 @@ function Main(props) {
         handleDrawerClose={handleDrawerClose}
         val={open}
       />
-        <Box className={classes.content}>
+      <Box className={classes.content}>
         <Box className={classes.toolbar}></Box>
         <Box>
           <Table />
-          <Agregar action={props} open={ruta==="AGREGAR"?true:false} setRuta={handleRoute} />
+          <Agregar
+            action={props}
+            open={ruta === 'AGREGAR' ? true : false}
+            setRuta={handleRoute}
+          />
         </Box>
       </Box>
     </div>

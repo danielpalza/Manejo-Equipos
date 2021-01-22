@@ -1,11 +1,9 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import {createPostRequest} from "../Fetch";
-import { makeStyles, Button } from '@material-ui/core';
-
+import { createPostRequest } from '../Fetch';
+import { Dialog, DialogTitle, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,41 +12,63 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
-  boxDialog:{
-    display:"flex",
-    justifyContent:"center",
+  boxDialog: {
+    display: 'flex',
+    justifyContent: 'center',
 
-    padding:"1vw"
+    padding: '1vw',
   },
-  button:{
-    margin:"0.3vw"
-  }
+  button: {
+    margin: '0.3vw',
+  },
 }));
 
 function Delete(props) {
-  console.log("props :", props)
+  console.log('props :', props);
   const classes = useStyles();
 
   const BorrarEquipo = () => {
-   createPostRequest("equipment/deleteEquipment",props.action.state.statReducer.user.token, {_id:props.rowData._id}, {})
-   props.action.equipDelete(props.rowData._id)
-   props.setRuta("")
-
+    createPostRequest(
+      'equipment/deleteEquipment',
+      props.action.state.statReducer.user.token,
+      { _id: props.rowData._id },
+      {}
+    );
+    props.action.equipDelete(props.rowData._id);
+    props.setRuta('');
   };
 
   return (
-  <Dialog open={props.open} onClose={()=> props.setRuta("")} aria-labelledby="simple-dialog-title" >
-    <DialogTitle id="simple-dialog-title">¿Seguro quiere borrar este equipo?</DialogTitle>
+    <Dialog
+      open={props.open}
+      onClose={() => props.setRuta('')}
+      aria-labelledby="simple-dialog-title"
+    >
+      <DialogTitle id="simple-dialog-title">
+        ¿Seguro quiere borrar este equipo?
+      </DialogTitle>
       <div className={classes.boxDialog}>
-        <Button className={classes.button} variant="outlined" color="secondary" onClick={()=> BorrarEquipo()} startIcon={<DeleteIcon />}>
+        <Button
+          className={classes.button}
+          variant="outlined"
+          color="secondary"
+          onClick={() => BorrarEquipo()}
+          startIcon={<DeleteIcon />}
+        >
           Borrar
         </Button>
-        <Button className={classes.button} variant="outlined" color="primary" onClick={()=> props.setRuta("")} startIcon={<ClearOutlinedIcon />}>
+        <Button
+          className={classes.button}
+          variant="outlined"
+          color="primary"
+          onClick={() => props.setRuta('')}
+          startIcon={<ClearOutlinedIcon />}
+        >
           Cancelar
         </Button>
       </div>
-  </Dialog>
+    </Dialog>
   );
 }
 
-export default Delete
+export default Delete;

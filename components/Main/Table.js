@@ -1,16 +1,16 @@
 import React, { forwardRef, useState, useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable from "@material-table/core";
 import Delete from './Delete';
 import Update from './Update';
-import { makeStyles, IconButton } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../../store/stats/reducer';
 import { mapDispatchToProps } from '../../store/stats/actions';
 
-import {DeleteOutline} from '@material-ui/icons/DeleteOutline';
-import {Edit} from '@material-ui/icons/Edit';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
 
-import {createGetRequest} from "../Fetch";
+import { createGetRequest } from '../Fetch';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -22,14 +22,12 @@ function Table(props) {
   const classes = useStyle();
   const [ruta, setRuta] = useState('');
   const [rowData, setRowData] = useState({});
-  
 
   //Icons
   const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
   };
-  
 
   let columns = [
     { title: 'Marca', field: 'marca' },
@@ -49,9 +47,12 @@ function Table(props) {
   let data = props.state.statReducer.equipments;
 
   useEffect(() => {
-    createGetRequest("equipment/getAllEquipment", props.state.statReducer.user.token, props.equipLoad )
+    createGetRequest(
+      'equipment/getAllEquipment',
+      props.state.statReducer.user.token,
+      props.equipLoad
+    );
   }, []);
-
 
   //Revisar la tabla para ver como funciona y mejorarlo, es un desastre
 
@@ -69,21 +70,30 @@ function Table(props) {
         icons={tableIcons}
         actions={[
           {
-          icon:"delete",
-          tooltip: 'Borrar',
-          onClick: (event,rowData) => handleAction(rowData, "DELETE"),
-        },
-        {
-          icon:"edit",
-          tooltip: 'Editar',
-          onClick: (event,rowData) => handleAction(rowData, "UPDATE"),
-        }
-      ]}
+            icon: 'delete',
+            tooltip: 'Borrar',
+            onClick: (event, rowData) => handleAction(rowData, 'DELETE'),
+          },
+          {
+            icon: 'edit',
+            tooltip: 'Editar',
+            onClick: (event, rowData) => handleAction(rowData, 'UPDATE'),
+          },
+        ]}
       />
       <div>
-        <Update rowData={rowData} action={props} open={ruta==="UPDATE"?true:false} setRuta={setRuta} />
-        <Delete rowData={rowData} action={props} open={ruta==="DELETE"?true:false} setRuta={setRuta} />
-
+        <Update
+          rowData={rowData}
+          action={props}
+          open={ruta === 'UPDATE' ? true : false}
+          setRuta={setRuta}
+        />
+        <Delete
+          rowData={rowData}
+          action={props}
+          open={ruta === 'DELETE' ? true : false}
+          setRuta={setRuta}
+        />
       </div>
     </div>
   );

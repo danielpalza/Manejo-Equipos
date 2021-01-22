@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
-import {createPostRequest} from '../Fetch';
-import _ from 'lodash';
-import { TextField, makeStyles, MenuItem, Button, Dialog } from '@material-ui/core';
+import { createPostRequest } from '../Fetch';
+import range from 'lodash/range';
+import {
+  TextField,
+  MenuItem,
+  Button,
+  Dialog,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 
-
 //Carga de datos de la lista
-//Recibir la fecha 
+//Recibir la fecha
 let d = new Date();
 
 // Arreglar para que los dates sean exactos, con años bisiestos y cantidad de dias en los meses exactos
-const mesArray = _.range(1, 13);
-const diaArray = _.range(1, 32);
-const añoArray = _.range(1940, d.getFullYear() + 1);
-
+const mesArray = range(1, 13);
+const diaArray = range(1, 32);
+const añoArray = range(1940, d.getFullYear() + 1);
 
 //Carga de estilo
 
@@ -36,25 +40,34 @@ function Agregar(props) {
     id: '',
     serie: '',
     marca: '',
-    mes:'',
-    año:'',
-    dia:''  });
- 
+    mes: '',
+    año: '',
+    dia: '',
+  });
+
   const handleChange = (event) => {
-    setProduct({...product, [event.target.name]: event.target.value})
-   };
- 
-  const AgregarEquipo = () => {
-    const body= { ...product, fechaIngreso: `${product.dia}/${product.mes}/${product.año}` }
-    createPostRequest('equipment/createEquipment',props.action.state.statReducer.user.token, body,{} )
-    props.action.equipAdd(body)
-    props.setRuta('')
+    setProduct({ ...product, [event.target.name]: event.target.value });
   };
- 
+
+  const AgregarEquipo = () => {
+    const body = {
+      ...product,
+      fechaIngreso: `${product.dia}/${product.mes}/${product.año}`,
+    };
+    createPostRequest(
+      'equipment/createEquipment',
+      props.action.state.statReducer.user.token,
+      body,
+      {}
+    );
+    props.action.equipAdd(body);
+    props.setRuta('');
+  };
+
   return (
     <Dialog
       open={props.open}
-      onClose={()=>props.setRuta('')}
+      onClose={() => props.setRuta('')}
       aria-labelledby="simple-dialog-title"
     >
       <div className={classes.root}>
@@ -97,11 +110,11 @@ function Agregar(props) {
           onChange={handleChange}
           helperText="Seleccione el dia"
         >
-          {diaArray.map((e) => 
+          {diaArray.map((e) => (
             <MenuItem key={e} value={e}>
               {e}
             </MenuItem>
-          )}
+          ))}
         </TextField>
 
         <TextField
@@ -149,7 +162,7 @@ function Agregar(props) {
           variant="contained"
           color="secondary"
           startIcon={<DeleteIcon />}
-          onClick={()=>props.setRuta('')}
+          onClick={() => props.setRuta('')}
         >
           Cancelar
         </Button>
@@ -158,4 +171,4 @@ function Agregar(props) {
   );
 }
 
-export default Agregar
+export default Agregar;

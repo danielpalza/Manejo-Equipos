@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, TextField, Button, Box } from '@material-ui/core';
+import { TextField, Button, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyle = makeStyles((theme) => ({
   boxText: {

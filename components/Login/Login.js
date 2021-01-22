@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Box } from '@material-ui/core';
+import {  Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import LoginBox from './LoginBox';
 import RegisterBox from './RegisterBox';
