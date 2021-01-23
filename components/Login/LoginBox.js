@@ -19,7 +19,7 @@ const LoginBox = (props) => {
 
   const handleConfirmacion = () => {
    
-    user.password.length === 0 && Window.alert('Debe ingresar una contraseña')
+    user.password.length === 0 && window.alert('Debe ingresar una contraseña')
     user.password.length > 0 && props.userLoad(user, 1);
   };
 

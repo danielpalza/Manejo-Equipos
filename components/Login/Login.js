@@ -52,12 +52,12 @@ function Login(props) {
       if(dir==1)requestLoginRegister("users/login", user, props.login)
       if(dir==2){ 
         requestLoginRegister("users/createUser", user )
-        Window.alert("Usuario creado")
+        window.alert("Usuario creado")
       }
 
     
     } else {
-      Window.alert("Email erroneo.")
+      window.alert("Email erroneo.")
     }
   }
 

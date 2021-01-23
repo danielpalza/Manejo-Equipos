@@ -26,13 +26,13 @@ const RegisterBox = (props) => {
         props.setRuta('LOGIN')
       }
       else { 
-         Window.alert ("Complete todos los campos")
+         window.alert ("Complete todos los campos")
       }
 
       
     }
     else {
-      Window.alert ("Las contraseñas no son iguales")
+      window.alert ("Las contraseñas no son iguales")
     }
      
   };
