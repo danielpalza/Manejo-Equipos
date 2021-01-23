@@ -12,7 +12,7 @@ const useStyle = makeStyles((theme) => ({
 
 const RegisterBox = (props) => {
   const classes = useStyle();
-  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastname: ''});
+  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastName: ''});
 
   const handleChange = (event) => {
     setUser({...user, [event.target.name]: event.target.value})
@@ -84,7 +84,7 @@ const RegisterBox = (props) => {
           <TextField
             id="standard-basic"
             color="primary"
-            name="lastname"
+            name="lastName"
             label="Apellido"
             onChange={handleChange}
           />
