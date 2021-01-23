@@ -21,7 +21,7 @@ const RegisterBox = (props) => {
   //Mejorar esta verificacion
   const handleConfirmacion = () => {
     if(user.password==user.confirmacion){
-      if(Object.values(user).every(a=> a!=="") {
+      if(Object.values(user).every(a => a!=="")) {
         props.userLoad({user.email, user.password, user.name, user.lastname}, 2);
         props.setRuta('LOGIN')
       }
