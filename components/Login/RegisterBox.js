@@ -22,7 +22,7 @@ const RegisterBox = (props) => {
   const handleConfirmacion = () => {
     if(user.password==user.confirmacion){
       if(Object.values(user).every(a => a!=="")) {
-        props.userLoad({user.email, user.password, user.name, user.lastname}, 2);
+        props.userLoad(user , 2);
         props.setRuta('LOGIN')
       }
       else { 
