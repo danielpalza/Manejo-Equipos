@@ -12,7 +12,7 @@ const useStyle = makeStyles((theme) => ({
 
 const RegisterBox = (props) => {
   const classes = useStyle();
-  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastName: ''});
+  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastname: ''});
 
   const handleChange = (event) => {
     setUser({...user, [event.target.name]: event.target.value})
@@ -20,10 +20,18 @@ const RegisterBox = (props) => {
 
   //Mejorar esta verificacion
   const handleConfirmacion = () => {
-    if(user.every(a=> a!=="") && user.password==user.confirmacion){
-      props.userLoad(user, 2);
+    if(user.password==user.confirmacion){
+      if(Object.values(user).every(a=> a!=="") {
+        props.userLoad({user.email, user.password, user.name, user.lastname}, 2);
+        props.setRuta('LOGIN')
+      }
+      else { 
+         Window.alert ("Complete todos los campos")
+      }
+
+      
     }
-    else{
+    else {
       Window.alert ("Las contraseñas no son iguales")
     }
      
@@ -45,7 +53,7 @@ const RegisterBox = (props) => {
           <TextField
             id="standard-basic"
             color="primary"
-            email="password"
+            name="password"
             type="password"
             label="Contraseña"
             onChange={handleChange}
@@ -76,7 +84,7 @@ const RegisterBox = (props) => {
           <TextField
             id="standard-basic"
             color="primary"
-
+            name="lastname"
             label="Apellido"
             onChange={handleChange}
           />

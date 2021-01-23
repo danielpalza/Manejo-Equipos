@@ -50,7 +50,10 @@ function Login(props) {
      
       //solucionar
       if(dir==1)requestLoginRegister("users/login", user, props.login)
-      if(dir==2)requestLoginRegister("users/createUser", user )
+      if(dir==2){ 
+        requestLoginRegister("users/createUser", user )
+        Window.alert("Usuario creado")
+      }
 
     
     } else {
