@@ -2,6 +2,9 @@ import React, { forwardRef, useState, useEffect } from 'react';
 import MaterialTable from "@material-table/core";
 import Delete from './Delete';
 import Update from './Update';
+import Registro from './Registro';
+import AgregarRegistro from './AgregarRegistro';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../../store/stats/reducer';
@@ -9,6 +12,8 @@ import { mapDispatchToProps } from '../../store/stats/actions';
 
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import Edit from '@material-ui/icons/Edit';
+import Add from '@material-ui/icons/Add';
+import Assignment from '@material-ui/icons/Assignment';
 
 import { createGetRequest } from '../Fetch';
 
@@ -27,6 +32,8 @@ function Table(props) {
   const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Add: forwardRef((props, ref) => <Add {...props} ref={ref} />),
+    Assignment: forwardRef((props, ref) => <Assignment {...props} ref={ref} />),
   };
 
   let columns = [
@@ -79,6 +86,16 @@ function Table(props) {
             tooltip: 'Editar',
             onClick: (event, rowData) => handleAction(rowData, 'UPDATE'),
           },
+          {
+            icon: 'add',
+            tooltip: 'Agregar',
+            onClick: (event, rowData) => handleAction(rowData, 'ADD'),
+          },
+          {
+            icon: 'assignment',
+            tooltip: 'Registros',
+            onClick: (event, rowData) => handleAction(rowData, 'REGISTER'),
+          },
         ]}
       />
       <div>
@@ -94,6 +111,21 @@ function Table(props) {
           open={ruta === 'DELETE' ? true : false}
           setRuta={setRuta}
         />
+        <Registro
+          rowData={rowData}
+          action={props}
+          open={ruta === 'REGISTER' ? true : false}
+          ruta={ruta}
+          setRuta={setRuta}
+        />
+        <AgregarRegistro
+          rowData={rowData}
+          action={props}
+          open={ruta === 'ADD' ? true : false}
+          
+          setRuta={setRuta}
+        />
+        
       </div>
     </div>
   );

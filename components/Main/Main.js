@@ -71,6 +71,7 @@ function Main(props) {
             open={ruta === 'AGREGAR' ? true : false}
             setRuta={handleRoute}
           />
+           
         </Box>
       </Box>
     </div>
