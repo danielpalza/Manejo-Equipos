@@ -57,7 +57,7 @@ const Barra = (props) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Manejo Equipos
+          Tablero
         </Typography>
       </Toolbar>
     </AppBar>
