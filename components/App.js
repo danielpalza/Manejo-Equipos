@@ -6,6 +6,7 @@ import { mapStateToProps } from '../store/stats/reducer';
 import Login from './Login/Login';
 import Main from './Main/Main.js';
 import Home from "./HomePage"
+import ProtectedRoute from "./ProtectedRoute"
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App(props) {
@@ -19,9 +20,9 @@ function App(props) {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/Main">
+            <ProtectedRoute path="/main">
               <Main />
-            </Route>
+            </ProtectedRoute>
             <Route path="/">
               <Home />
             </Route>

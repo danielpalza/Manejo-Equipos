@@ -9,7 +9,7 @@ async function Fetch(myRequest, action) {
       .then((data) => {
         console.log('data fetch:', data);
         console.log("function:", action)
-        typeof action == 'function' && action(data);
+        return typeof action == 'function' &&  action(data);
         })
       .catch((e) => console.log({ Status: 'ERROR_FETCH', message:"Error en el proceso", text: e }));
   
@@ -38,6 +38,7 @@ function createPostRequest(url, token, body, action){
 
 }
 
+//revisar si los dos son el mismo proceso, y si se puede achicar
 function createGetRequest(url, token, action){
 
   const urlUse = `${urlAPI}api/v1/${url}`;
@@ -53,6 +54,32 @@ function createGetRequest(url, token, action){
  
   Fetch(myRequest, action)
 }
+
+
+function authRequest(token){
+
+  const urlUse = `${urlAPI}api/v1/authToken`;
+  const myInitGet = {
+  method: "GET",
+  headers: {
+    'Content-Type': 'application/json',
+    token,
+    },
+  };
+
+  let myRequest = new Request(urlUse, myInitGet);
+ 
+  return Fetch(myRequest, (data)=>{
+    if(data.status=="OK"){
+      localStorage.setItem("token", data.data.token)
+      return true
+    }
+    else{
+      return false
+    }
+  })
+}
+
 
 function requestLoginRegister(url, body, action){
 
@@ -75,4 +102,4 @@ function requestLoginRegister(url, body, action){
 
 
 
-export {createGetRequest, createPostRequest, requestLoginRegister };
+export {createGetRequest, createPostRequest, requestLoginRegister , authRequest};
