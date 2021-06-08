@@ -7,7 +7,7 @@ import Login from './Login/Login';
 import Main from './Main/Main.js';
 import Home from "./HomePage"
 import ProtectedRoute from "./ProtectedRoute"
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom';
 
 function App(props) {
   const logged = props.state.statReducer.logged;
@@ -18,13 +18,13 @@ function App(props) {
         <Router>
           <Switch>
             <Route path="/login">
-              <Login />
+              {logged ? <Redirect to="/main"/> : <Login />}
             </Route>
             <ProtectedRoute path="/main">
               <Main />
             </ProtectedRoute>
             <Route path="/">
-              <Home />
+            {logged ? <Redirect to="/main"/> : <Home /> }
             </Route>
           </Switch>
         </Router>
