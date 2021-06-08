@@ -79,7 +79,7 @@ const LoginBox = (props) => {
           
         </Box>
         <Box m={2}>
-        <Link to="/">
+        <Link to="/" style={{ textDecoration: 'none' }}>
             <Button
               fullWidth={true}
               variant="contained"

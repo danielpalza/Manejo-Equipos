@@ -31,7 +31,7 @@ function Home() {
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography variant="h4">Manejo de equipos</Typography>
-          <Link to="/login">
+          <Link to="/login" style={{ textDecoration: 'none' }}>
             <Button
               className={classes.button}
               variant="contained"
