@@ -1,22 +1,22 @@
-import React from 'react'
-import { authRequest} from '../Fetch';
+import React from 'react';
+import { authRequest } from '../Fetch';
+import { Route } from 'react-router-dom';
 
-function PrivateRoute({ children, ...rest }) {
-    //let auth = useAuth();
-    return (
-      <Route
-        {...rest}
-        render={() =>
-          authRequest(localStorage.getItem(token))? (
-            children
-          ) : (
-            <Redirect
-              to="/"
-            />
-          )
-        }
-      />
-    );
-  }
+function ProtectedRoute({ children, ...rest }) {
+  //let auth = useAuth();
+  console.log("token: ",localStorage.getItem("token"))
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        authRequest(localStorage.getItem("token")) ? (
+          children
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+}
 
-export default PrivateRoute;
+export default ProtectedRoute;

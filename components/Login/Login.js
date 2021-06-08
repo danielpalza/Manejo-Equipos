@@ -34,13 +34,6 @@ function Login(props) {
 
   const classes = useStyle();
 
-  console.log('login props:', props);
-  
-  //Revisa que el token de la anterior sesion sea valido
-  useEffect(() => {
-    localStorage.getItem('token') && createGetRequest("users/authToken", localStorage.getItem('token'), props.login );
-  }, []);
-
   //Verifica el email y hace el pedido
   function userLoad(user, dir) {
     if (
