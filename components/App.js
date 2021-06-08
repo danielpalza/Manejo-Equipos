@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { mapStateToProps } from '../store/stats/reducer';
 import Login from './Login/Login';
 import Main from './Main/Main.js';
+import Home from "./HomePage"
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App(props) {
@@ -20,6 +21,9 @@ function App(props) {
             </Route>
             <Route path="/Main">
               <Main />
+            </Route>
+            <Route path="/">
+              <Home />
             </Route>
           </Switch>
         </Router>

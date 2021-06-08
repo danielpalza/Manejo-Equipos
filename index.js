@@ -7,9 +7,7 @@ import store from './store';
 
 
 render(
-  <Provider store={store}> npm install formik --save
-
-    
+  <Provider store={store}>     
       <App/>
    </Provider>,
   document.getElementById('root')
