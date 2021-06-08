@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
   boxText: {
@@ -115,6 +116,16 @@ const RegisterBox = (props) => {
           >
             Iniciar sesion
           </Button>
+          <Link to="/">
+            <Button
+              fullWidth={true}
+              variant="contained"
+              color="primary"
+              
+            >
+              Regresar
+            </Button>
+          </Link>
         </Box>
       </Box>
     </div>

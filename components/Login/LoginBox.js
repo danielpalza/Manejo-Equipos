@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {  TextField, Button, Box } from '@material-ui/core';
+import { TextField, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
   boxText: {
@@ -11,15 +12,14 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const LoginBox = (props) => {
-  console.log("props login:", props)
+  console.log('props login:', props);
   const classes = useStyle();
-  const [user, setUser] = useState({ email: '', password: '' },);
+  const [user, setUser] = useState({ email: '', password: '' });
 
   // Manejo de faltas, pasar al login mayor
 
   const handleConfirmacion = () => {
-   
-    user.password.length === 0 && window.alert('Debe ingresar una contraseña')
+    user.password.length === 0 && window.alert('Debe ingresar una contraseña');
     user.password.length > 0 && props.userLoad(user, 1);
   };
 
@@ -33,7 +33,8 @@ const LoginBox = (props) => {
           onChange={(e) => {
             setUser({
               ...user,
-              email: e.target.value});
+              email: e.target.value,
+            });
           }}
         />
       </Box>
@@ -46,7 +47,8 @@ const LoginBox = (props) => {
           onChange={(e) => {
             setUser({
               ...user,
-              password: e.target.value });
+              password: e.target.value,
+            });
           }}
         />
       </Box>
@@ -74,6 +76,19 @@ const LoginBox = (props) => {
           >
             Registrar
           </Button>
+          
+        </Box>
+        <Box m={2}>
+        <Link to="/">
+            <Button
+              fullWidth={true}
+              variant="contained"
+              color="primary"
+              
+            >
+              Regresar
+            </Button>
+          </Link>
         </Box>
       </Box>
     </div>
