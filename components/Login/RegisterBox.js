@@ -13,29 +13,30 @@ const useStyle = makeStyles((theme) => ({
 
 const RegisterBox = (props) => {
   const classes = useStyle();
-  const [user, setUser] = useState({ email: '', password: '', confirmacion: '', name: '', lastName: ''});
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    confirmacion: '',
+    name: '',
+    lastName: '',
+  });
 
   const handleChange = (event) => {
-    setUser({...user, [event.target.name]: event.target.value})
-   };
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
   //Mejorar esta verificacion
   const handleConfirmacion = () => {
-    if(user.password==user.confirmacion){
-      if(Object.values(user).every(a => a!=="")) {
-        props.userLoad(user , 2);
-        props.setRuta('LOGIN')
+    if (user.password == user.confirmacion) {
+      if (Object.values(user).every((a) => a !== '')) {
+        props.userLoad(user, 2);
+        props.setRuta('LOGIN');
+      } else {
+        window.alert('Complete todos los campos');
       }
-      else { 
-         window.alert ("Complete todos los campos")
-      }
-
-      
+    } else {
+      window.alert('Las contraseñas no son iguales');
     }
-    else {
-      window.alert ("Las contraseñas no son iguales")
-    }
-     
   };
 
   return (
@@ -116,13 +117,10 @@ const RegisterBox = (props) => {
           >
             Iniciar sesion
           </Button>
+        </Box>
+        <Box m={2}>
           <Link to="/">
-            <Button
-              fullWidth={true}
-              variant="contained"
-              color="primary"
-              
-            >
+            <Button fullWidth={true} variant="contained" color="primary">
               Regresar
             </Button>
           </Link>
