@@ -9,7 +9,9 @@ import {
   Container,
   Button,
   IconButton,
+  Grid,
   Typography,
+  Link as LinkM,
 } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
@@ -30,7 +32,7 @@ function Home() {
     <Fragment>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h4">Manejo de equipos</Typography>
+          <Typography variant="h3">Manejo de equipos</Typography>
           <Link to="/login" style={{ textDecoration: 'none' }}>
             <Button
               className={classes.button}
@@ -45,44 +47,81 @@ function Home() {
       </AppBar>
 
       <Container className={classes.box}>
-        <Box >
-          <Typography variant="h6">
+        <Box>
+          <Typography variant="h4" className={classes.text}>
             Logre una mejor organizacion de sus procesos de mantenimiento
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="h6" className={classes.text}>
             Una manera de poder organizar el mantenimiento del inventario de
             equipamiento. Aproveche al maximo el tiempo que tiene, genere
             documentacion de los equipos que adquirieron mantenimiento , y
             planifique mejor sus tareas del dia.
           </Typography>
         </Box>
-        <Box >
+        <Box>
           <Carousel
             autoPlay={true}
             infiniteLoop={true}
             interval={3000}
             showThumbs={false}
             showStatus={false}
-            className={classes.image}
+            className={classes.slider}
           >
             <div>
-              <img src={imagen1}  />
+              <img src={imagen1} className={classes.image} />
             </div>
             <div>
-              <img src={imagen2}  />
+              <img src={imagen2} className={classes.image} />
             </div>
             <div>
-              <img src={imagen3}  />
+              <img src={imagen3} className={classes.image} />
             </div>
             <div>
-              <img src={imagen4} />
+              <img src={imagen4} className={classes.image} />
             </div>
             <div>
-              <img src={imagen5}  />
+              <img src={imagen5} className={classes.image} />
             </div>
           </Carousel>
         </Box>
       </Container>
+
+      <Box
+        px={{ xs: 10, sm: 10 }}
+        py={{ xs: 5, sm: 10 }}
+        bgcolor="text.secondary"
+        color="white"
+      >
+        <Container>
+          <Grid container spacing={5}>
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={1}>Ayuda</Box>
+              <Box>
+                <LinkM href="/" color="inherit">
+                  Contacto
+                </LinkM>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={1}>Usuario</Box>
+              <Box>
+                <Link to="/login" className={classes.link}>
+                  Iniciar sesión
+                </Link>
+              </Box>
+              <Box>
+                <Link to="/login" className={classes.link}>
+                  Registrarse
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
+            Creado por Daniel Palza &reg; {new Date().getFullYear()}
+          </Box>
+        </Container>
+      </Box>
     </Fragment>
   );
 }
