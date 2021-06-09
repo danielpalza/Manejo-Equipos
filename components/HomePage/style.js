@@ -8,10 +8,11 @@ export let style={
    button:{
      textDecoration: "none"
    },
-   img:{
-     width: "30vw",
+   image:{
+     width: "50vw",
      height: "50vh",
-     borderRadius: "2%"
+     borderRadius: "2%",
+     margin: "1vh"
    },
    box:{
     display:"flex",
