@@ -33,7 +33,7 @@ function Main(props) {
 
   const [open, setOpen] = useState(false);
   const [ruta, setRuta] = useState('');
-  const [unlogin, setUnlogin] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   //Metodos
   const handleRoute = (prop) => {
@@ -52,12 +52,12 @@ function Main(props) {
   const handleCloseSession = () => {
     localStorage.setItem('token', '');
     props.unLogin();
-    setUnlogin(true);
+    setRedirect(true);
   };
   ruta === 'OUT' && handleCloseSession();
 
-  if (unlogin) {
-    return <Redirect to="/" />;
+  if (redirect) {
+    return <Redirect to="/" exact/>;
   }
 
   return (
