@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CssBaseline, Box } from '@material-ui/core';
-import {useTheme, makeStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 function Main(props) {
   //Cambiar este guardado para poder usar el main sin redux, es para lo unico que lo precisa
   if (props.state.statReducer.user.token !== undefined) {
-
     localStorage.setItem('token', props.state.statReducer.user.token);
   }
 
@@ -53,12 +52,12 @@ function Main(props) {
   const handleCloseSession = () => {
     localStorage.setItem('token', '');
     props.unLogin();
-    setUnlogin(true)
-    
+    setUnlogin(true);
   };
   ruta === 'OUT' && handleCloseSession();
-  if(unlogin){
-    return <Redirect to="/" />
+
+  if (unlogin) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -79,7 +78,6 @@ function Main(props) {
             open={ruta === 'AGREGAR' ? true : false}
             setRuta={handleRoute}
           />
-           
         </Box>
       </Box>
     </div>
