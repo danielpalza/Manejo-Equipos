@@ -50,6 +50,7 @@ function Main(props) {
   const handleCloseSession = () => {
     localStorage.setItem('token', '');
     props.unLogin();
+    return <Redirect to="/main" />
   };
   ruta === 'OUT' && handleCloseSession();
 

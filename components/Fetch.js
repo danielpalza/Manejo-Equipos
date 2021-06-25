@@ -1,13 +1,11 @@
 let urlAPI = 'https://manejo-equipos-api.herokuapp.com/';
 
 async function Fetch(myRequest, action) {
-  //Mejorar el sistema de mensajes de error
-  console.log('fetch: ', myRequest, action);
+
+
   await fetch(myRequest)
     .then((res) => res.json())
     .then((data) => {
-      console.log('data fetch:', data);
-      console.log('function:', action);
       typeof action == 'function' && action(data);
     })
     .catch((e) =>
@@ -99,7 +97,6 @@ function requestLoginRegister(url, body, action) {
   };
 
   let myRequest = new Request(urlUse, myInitGet);
-  console.log('urlUse:', urlUse);
 
   Fetch(myRequest, action);
 }
