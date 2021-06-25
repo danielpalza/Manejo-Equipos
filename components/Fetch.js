@@ -54,7 +54,7 @@ function createGetRequest(url, token, action) {
 }
 
 async function authRequest(token) {
-  const urlUse = `${urlAPI}api/v1/authToken`;
+  const urlUse = `${urlAPI}api/v1/users/authToken`;
   const myInitGet = {
     method: 'GET',
     headers: {

@@ -20,7 +20,7 @@ import { createGetRequest} from './Fetch';
 
 function App(props) {
   const logged = props.state.statReducer.logged;
-  console.log('props:', props);
+
 
   //Revisa que el token de la anterior sesion sea valido
   useEffect(() => {

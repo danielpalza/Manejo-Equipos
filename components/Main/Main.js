@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CssBaseline, Box } from '@material-ui/core';
 import {useTheme, makeStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom';
 import Barra from './Barra';
 import Caja from '../Navbar/Caja';
 import Agregar from './Agregar';
