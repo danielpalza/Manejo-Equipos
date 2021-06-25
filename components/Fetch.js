@@ -6,6 +6,7 @@ async function Fetch(myRequest, action) {
   await fetch(myRequest)
     .then((res) => res.json())
     .then((data) => {
+      
       typeof action == 'function' && action(data);
     })
     .catch((e) =>
@@ -69,6 +70,7 @@ async function authRequest(token) {
     .then((res) => res.json())
     .then((data) => {
       if (data.status == 'OK') {
+        console.log({data})
         localStorage.setItem('token', data.data.token);
         return true;
       } else {

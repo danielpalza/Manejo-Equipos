@@ -5,6 +5,7 @@ const iniState = {
 };
 
 export default function Reducer(state = iniState, action) {
+  console.log(state)
 
 
   /*Acciones login*/
