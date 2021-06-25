@@ -3,20 +3,17 @@ import { authRequest } from '../Fetch';
 import { Route } from 'react-router-dom';
 
 function ProtectedRoute({ children, ...rest }) {
-  //let auth = useAuth();
-  console.log('token: ', localStorage.getItem('token'));
+  console.log("token auth: ",localStorage.getItem("token"))
   return (
     <Route
       {...rest}
-      render={() => {
-        if (localStorage.getItem('token').length > 0) {
-          authRequest(localStorage.getItem('token')) ? (
-            children
-          ) : (
-            <Redirect to="/" />
-          );
-        }
-      }}
+      render={() =>
+        authRequest(localStorage.getItem("token")) ? (
+          children
+        ) : (
+          <Redirect to="/" />
+        )
+      }
     />
   );
 }
