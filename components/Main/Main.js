@@ -57,7 +57,7 @@ function Main(props) {
   ruta === 'OUT' && handleCloseSession();
 
   if (redirect) {
-    return <Redirect to="/" exact/>;
+    return <Redirect to="/login" />;
   }
 
   return (

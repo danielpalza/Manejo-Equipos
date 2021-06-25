@@ -8,8 +8,7 @@ function ProtectedRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={() =>
-        authRequest(localStorage.getItem("token")) ? (
+      render={() =>localStorage.getItem("token")&&authRequest(localStorage.getItem("token")) ? (
           children
         ) : (
           <Redirect to="/" />
