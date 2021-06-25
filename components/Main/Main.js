@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function Main(props) {
   //Cambiar este guardado para poder usar el main sin redux, es para lo unico que lo precisa
   if (props.state.statReducer.user.token !== undefined) {
-    
+
     localStorage.setItem('token', props.state.statReducer.user.token);
   }
 
@@ -58,7 +58,7 @@ function Main(props) {
   };
   ruta === 'OUT' && handleCloseSession();
   if(unlogin){
-    return <Redirect to="/main" />
+    return <Redirect to="/" />
   }
 
   return (
